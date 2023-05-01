@@ -1,8 +1,6 @@
 using asp_student_crud_api.Data;
-using asp_student_crud_api.Models;
 using asp_student_crud_api.Repository;
 using Microsoft.EntityFrameworkCore;
-using AutoMapper;
 
 namespace asp_student_crud_api
 {
@@ -14,7 +12,7 @@ namespace asp_student_crud_api
 
             // Add services to the container.
 
-            builder.Services.AddControllers();
+            builder.Services.AddControllers().AddNewtonsoftJson();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 

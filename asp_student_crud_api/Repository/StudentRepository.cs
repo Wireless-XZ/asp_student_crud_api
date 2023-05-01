@@ -1,8 +1,8 @@
 ﻿using asp_student_crud_api.Data;
 using asp_student_crud_api.Models;
 using AutoMapper;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.EntityFrameworkCore;
-using static System.Reflection.Metadata.BlobBuilder;
 
 namespace asp_student_crud_api.Repository
 {
@@ -53,7 +53,18 @@ namespace asp_student_crud_api.Repository
                 _studentDbContext.Students.Update(existingStudent);
                 await _studentDbContext.SaveChangesAsync();
             }
+        }
 
+        public async Task UpdateStudentPatchAsync(int studentId, JsonPatchDocument studentModel)
+        {
+            var existingStudent = await _studentDbContext.Students.FindAsync(studentId);
+            
+            if (existingStudent != null) 
+            {
+                studentModel.ApplyTo(existingStudent);
+                existingStudent.UpdatedAt = DateTime.Now;
+                await _studentDbContext.SaveChangesAsync();
+            }
         }
 
         public async Task DeleteStudentAsync(int studentId)
@@ -63,5 +74,6 @@ namespace asp_student_crud_api.Repository
             _studentDbContext.Students.Remove(student);
             await _studentDbContext.SaveChangesAsync();
         }
+
     }
 }

@@ -1,5 +1,6 @@
 ﻿using asp_student_crud_api.Models;
 using asp_student_crud_api.Repository;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -55,6 +56,16 @@ namespace asp_student_crud_api.Controllers
         )
         {
             await _studentRepository.UpdateStudentAsync(id, studentModel);
+            return Ok();
+        }
+
+        [HttpPatch("{id}")]
+        public async Task<IActionResult> UpdateStudentPatch(
+            [FromBody] JsonPatchDocument studentModel,
+            [FromRoute] int id
+        )
+        {
+            await _studentRepository.UpdateStudentPatchAsync(id, studentModel);
             return Ok();
         }
 
