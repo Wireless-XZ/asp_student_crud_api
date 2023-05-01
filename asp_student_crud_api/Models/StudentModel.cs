@@ -6,6 +6,10 @@ namespace asp_student_crud_api.Models
     {
         public int Id { get; set; }
 
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
+
+        public DateTime UpdatedAt { get; set; } = DateTime.Now;
+
         [Required]
         public string FirstName { get; set; }
 

@@ -24,9 +24,9 @@ namespace asp_student_crud_api.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetStudentById(int studentId)
+        public async Task<IActionResult> GetStudentById(int id)
         {
-            var student = await _studentRepository.GetStudentByIdAsync(studentId);
+            var student = await _studentRepository.GetStudentByIdAsync(id);
 
             if (student == null) 
             {
